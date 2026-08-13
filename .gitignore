@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+
+# 원본 수집 데이터는 저장소에 넣지 않는다.
+# 용량이 크고(약 90MB) 재생성이 가능하다 — `node tools/fetch-data.mjs`
+data/raw/
