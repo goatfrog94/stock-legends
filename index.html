@@ -607,7 +607,11 @@ const NAME_KEY = 'stocklegends.name';
  * 온라인 리더보드. 배포할 때만 채우면 켜진다. 비어 있으면 브라우저 안에만 기록이 남는다.
  * anon key는 클라이언트에 노출되는 게 정상이고, 실제 방어선은 Supabase의 RLS다. README 참고.
  */
-const SB = { url: '', key: '', table: 'stock_legends_scores' };
+const SB = {
+  url: 'https://xzynjhfqnputueclkysx.supabase.co',
+  key: 'sb_publishable_8k_mjG08sZpr02CYp-eqLA_wCCg9PsF',
+  table: 'stock_legends_scores',
+};
 const sbOn = () => !!(SB.url && SB.key);
 
 function saveGame() {
