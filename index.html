@@ -134,7 +134,9 @@
   .wbar{display:flex; height:10px; border-radius:5px; overflow:hidden; background:var(--line); margin-bottom:10px}
   .wbar div{height:100%; transition:width .18s ease}
   .poslist{margin-top:2px}
-  .pos{display:flex; align-items:center; gap:8px; padding:8px 0; border-top:1px solid var(--line); font-size:12.5px}
+  .pos{display:flex; align-items:center; gap:8px; padding:8px 4px; border-top:1px solid var(--line);
+       font-size:12.5px; cursor:pointer; border-radius:8px; user-select:none}
+  .pos:hover{background:var(--surface)}
   .pos:first-child{border-top:none}
   .pos .nm{flex:1; min-width:0}
   .pos .nm b{font-weight:800}
@@ -190,6 +192,101 @@
   .trev ul{list-style:none; font-size:11.5px; font-weight:600; line-height:1.7}
   .trev li.g{color:var(--good)} .trev li.b{color:var(--up)}
   .trev li:before{content:'· '; opacity:.6}
+
+  /* 멘토 배지 · 팝오버 */
+  .mtBadge{
+    display:flex; align-items:center; gap:6px; padding:5px 10px; border-radius:8px;
+    background:var(--surface); font-size:12px; font-weight:700; color:var(--sub);
+  }
+  .mtBadge:hover{background:var(--line)}
+  .mtBadge b{font-size:11.5px; font-weight:800; color:var(--sub2); font-variant-numeric:tabular-nums}
+  .mtBadge.on{background:var(--accent-weak); color:var(--accent)}
+  .mtBadge.on b{color:var(--accent)}
+  #mtPop{
+    position:fixed; z-index:120; width:290px; background:var(--bg); border:1px solid var(--line);
+    border-radius:14px; padding:14px; box-shadow:0 10px 34px rgba(0,0,0,.14);
+  }
+  .mtpHead{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:2px}
+  .mtpHead b{font-size:14px; font-weight:800}
+  .mtpHead span{font-size:11.5px; font-weight:700; color:var(--sub2)}
+  .mtpNote{font-size:11px; font-weight:600; color:var(--sub2); line-height:1.5; margin-top:9px;
+           padding-top:9px; border-top:1px solid var(--line)}
+
+  /* 차트 헤더 주문 버튼 · 손절 칩 */
+  .chead{display:flex; align-items:flex-start; gap:12px}
+  .cheadL{flex:1; min-width:0}
+  .cheadR{display:flex; gap:6px; flex:0 0 auto}
+  .minibtn{padding:9px 18px; border-radius:10px; font-size:13.5px; font-weight:800; color:#fff}
+  .minibtn.buy{background:var(--up)} .minibtn.sell{background:var(--down)}
+  .minibtn:disabled{background:var(--line); color:var(--sub2); cursor:not-allowed}
+  .stopChip{
+    position:absolute; top:12px; right:80px; display:flex; align-items:center; gap:6px;
+    background:#fff0f1; border:1px solid #ffd4d8; border-radius:9px; padding:4px 5px 4px 9px;
+    font-size:11px; font-weight:700; color:var(--up); z-index:5;
+  }
+  .stopChip b{font-size:12px; font-weight:800}
+  .stopChip em{font-style:normal; color:#d9737c}
+  .stopChip button{width:18px; height:18px; border-radius:5px; color:var(--up); font-size:11px; line-height:1}
+  .stopChip button:hover{background:#ffd4d8}
+
+  /* 우측 주문 버튼 */
+  .orderBtns{display:flex; gap:8px}
+  .orderBtns .bigbtn{flex:1; display:flex; align-items:center; justify-content:center; gap:7px}
+  kbd{
+    font-family:inherit; font-size:10px; font-weight:800; padding:2px 5px; border-radius:4px;
+    background:rgba(255,255,255,.25); letter-spacing:.3px;
+  }
+
+  /* 주문 팝업 */
+  .omodal{
+    background:var(--bg); border-radius:18px; width:100%; max-width:380px;
+    max-height:calc(100vh - 32px); display:flex; flex-direction:column; overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);
+  }
+  .ohead{display:flex; align-items:center; padding:18px 18px 12px; border-bottom:1px solid var(--line)}
+  .ohead h2{flex:1; font-size:18px; font-weight:800; letter-spacing:-.5px}
+  .oclose{width:28px; height:28px; border-radius:8px; color:var(--sub); font-size:14px}
+  .oclose:hover{background:var(--surface)}
+  .obody{padding:14px 18px 4px; overflow-y:auto; flex:1}
+  .oline{display:flex; justify-content:space-between; align-items:baseline; padding:5px 0; font-size:13px}
+  .oline span{color:var(--sub); font-weight:600}
+  .oline b{font-weight:800; font-size:14px}
+  .oline.big b{font-size:19px; letter-spacing:-.5px}
+  .oline.hi{padding:9px 0}
+  .oline.hi b{font-size:16px}
+  .odiv{height:1px; background:var(--line); margin:10px 0}
+  .obox{background:var(--surface2); border-radius:11px; padding:10px 12px; margin-bottom:12px}
+  .olabel{font-size:12px; font-weight:800; color:var(--sub); margin:14px 0 8px}
+  .opct{display:flex; gap:5px; margin-bottom:9px}
+  .opct button{flex:1; padding:9px 0; border-radius:9px; background:var(--surface); font-size:12.5px; font-weight:700; color:var(--sub)}
+  .opct button:hover{background:var(--line)}
+  .opct button.on{background:var(--accent); color:#fff}
+  .oqtyrow{display:flex; align-items:center; gap:8px}
+  .oqty{
+    flex:1; padding:13px 14px; border-radius:11px; border:1px solid var(--line);
+    font-size:20px; font-weight:800; text-align:right; background:var(--bg); outline:none;
+  }
+  .oqty:focus{border-color:var(--accent)}
+  .ounit{font-size:14px; font-weight:700; color:var(--sub)}
+  .oarrow{color:var(--sub2); font-weight:700; margin:0 5px}
+  .owarn{background:#fff8e1; border-radius:10px; padding:10px 12px; font-size:12px;
+         font-weight:700; color:#8a6d1f; line-height:1.5; margin-top:10px}
+  .owarn.hot{background:#fff0f1; color:var(--up)}
+  .ofoot{display:flex; gap:8px; padding:14px 18px; border-top:1px solid var(--line)}
+  .ofoot button{padding:14px 0; border-radius:11px; font-size:15px; font-weight:800}
+  .oghost{flex:0 0 96px; background:var(--surface); color:var(--text)}
+  .ogo{flex:1; color:#fff}
+  .ogo.buy{background:var(--up)} .ogo.sell{background:var(--down)}
+  .ogo:disabled{background:var(--line); color:var(--sub2); cursor:not-allowed}
+
+  /* 팝업 안 손절선 서랍 */
+  .odrawer{margin-top:14px; border-top:1px solid var(--line); padding-top:12px}
+  .odtoggle{display:flex; align-items:center; gap:6px; font-size:12.5px; font-weight:800; color:var(--sub)}
+  .odtoggle:hover{color:var(--text)}
+  .odtoggle i{font-style:normal; font-size:10px; transition:transform .15s}
+  .odtoggle.open i{transform:rotate(90deg)}
+  .odbody{padding-top:11px}
+  .odhint{font-size:11.5px; font-weight:600; color:var(--sub2); line-height:1.5; margin-bottom:9px}
 
   /* 주문 */
   .ordtabs{display:flex; background:var(--surface); border-radius:10px; padding:3px; gap:3px; margin-bottom:11px}
@@ -298,6 +395,9 @@
     <div class="logo">주식<span>전설</span></div>
     <div class="gdate num" id="gdate">1년차 1월</div>
     <div class="era" id="era">—</div>
+    <button class="mtBadge" id="mtBadge">
+      <span id="mtName">—</span><b class="num" id="mtCount"></b>
+    </button>
     <div class="idx num">시장지수 <b id="idxv">1000</b> <span id="idxc"></span></div>
     <div class="spacer"></div>
     <div class="speed" id="speed">
@@ -347,10 +447,16 @@
 
     <div class="pane">
       <div class="chead">
-        <h1><span id="sname">—</span><span class="arch" id="sarch"></span></h1>
-        <div class="cprice">
-          <span class="p num" id="sprice">—</span>
-          <span class="ch num" id="schg"></span>
+        <div class="cheadL">
+          <h1><span id="sname">—</span><span class="arch" id="sarch"></span></h1>
+          <div class="cprice">
+            <span class="p num" id="sprice">—</span>
+            <span class="ch num" id="schg"></span>
+          </div>
+        </div>
+        <div class="cheadR">
+          <button class="minibtn buy" data-side="buy">매수</button>
+          <button class="minibtn sell" data-side="sell">매도</button>
         </div>
       </div>
       <div class="ctabs" id="ctabs">
@@ -362,6 +468,11 @@
       </div>
       <div id="cvWrap">
         <canvas id="cv"></canvas>
+        <div class="stopChip" id="stopChip" hidden>
+          <span>손절선</span><b class="num" id="stopChipP"></b>
+          <em class="num" id="stopChipPct"></em>
+          <button id="stopChipX" title="손절선 지우기">✕</button>
+        </div>
         <div class="legend">
           <span style="color:#ff9f0a"><i style="background:#ff9f0a"></i>50일</span>
           <span style="color:#b0b8c1"><i style="background:#b0b8c1"></i>200일</span>
@@ -386,57 +497,57 @@
         </div>
 
         <div class="card">
-          <h3><span id="mtName" data-tip="전설적인 투자자 3명의 원칙을 10년씩 배웁니다. 아래 미션은 참고용 목표예요. 하나도 안 지키고 마음대로 사고팔아도 게임은 정상적으로 끝납니다.">—</span><span class="num" id="mtYears" style="color:var(--sub2)"></span></h3>
-          <div class="mtwho" id="mtWho"></div>
-          <div class="mtline" id="mtLine"></div>
-          <div id="mtMissions"></div>
-        </div>
-
-        <div class="card">
-          <h3>포트폴리오 <span class="num" id="investPct" style="color:var(--sub2)"></span></h3>
+          <h3>보유 종목 <span class="num" id="investPct" style="color:var(--sub2)"></span></h3>
           <div class="wbar" id="wbar"></div>
           <div class="poslist" id="poslist"></div>
-          <div class="riskline">
+          <div class="riskline" id="riskline">
             <div class="kv"><span data-tip="지금 그어둔 손절선이 전부 걸렸을 때 잃게 되는 금액입니다. 이 숫자를 감당할 수 있는지가 핵심이에요.">지금 걸린 돈</span><b class="num" id="riskAmt">—</b></div>
             <div class="nostop" id="noStopWarn" hidden></div>
           </div>
         </div>
 
-        <div class="card">
-          <h3>주문</h3>
-          <div id="pendingBox"></div>
-          <div class="ordtabs" id="ordtabs">
-            <button data-side="buy" class="on">매수</button>
-            <button data-side="sell">매도</button>
-          </div>
-          <div class="pctlabel" id="pctLabel">현금의</div>
-          <div class="qtyrow" id="pctRow">
-            <button data-pct="10">10%</button><button data-pct="25">25%</button>
-            <button data-pct="50">50%</button><button data-pct="100">최대</button>
-          </div>
-          <input class="qtyin num" id="qty" type="number" min="0" step="1" value="0">
-          <div class="hint" id="orderHint"></div>
-          <button class="bigbtn buy" id="btnOrder">매수</button>
-        </div>
-
-        <div class="card">
-          <h3><span data-tip="여기까지 떨어지면 자동으로 팔아버리는 가격입니다. 미리 정해두면 크게 잃을 일이 줄어요. 안 써도 게임은 됩니다.">손절선</span> · <span data-tip="'이번에 최대 얼마까지 잃어도 괜찮은가'를 먼저 정하면, 그에 맞는 매수 수량이 자동으로 계산됩니다. 대가들이 공통으로 쓰는 방식이에요.">얼마나 살까</span></h3>
-          <div class="hint" style="margin-top:0">차트를 <b>드래그</b>해서 손절선을 그으세요.</div>
-          <div class="hint" style="margin-top:-4px; color:var(--sub2)">몰라도 됩니다. 익숙해지면 그때 써보세요.</div>
-          <div class="riskrow" id="riskrow">
-            <button data-r="0.5">0.5%</button><button data-r="1" class="on">1%</button>
-            <button data-r="2">2%</button><button data-r="3">3%</button>
-          </div>
-          <div class="kv"><span>손절가</span><b class="num" id="stopP">미설정</b></div>
-          <div class="kv"><span>현재가 대비</span><b class="num" id="stopPct">—</b></div>
-          <div class="kv" id="stopVsCostRow" hidden><span>평단 대비 <b style="color:var(--sub2)">실제 손실</b></span><b class="num" id="stopVsCost">—</b></div>
-          <div class="kv"><span data-tip="위에서 고른 비율만큼만 잃도록 계산한 매수 수량입니다.">이만큼 사면 됩니다</span><b class="num" id="riskQty">—</b></div>
-          <div class="qtyrow" style="margin:9px 0 0">
-            <button id="applyRisk">이 수량으로 채우기</button>
-            <button id="clearStop">손절선 지우기</button>
-          </div>
+        <div id="pendingBox"></div>
+        <div class="orderBtns">
+          <button class="bigbtn buy" data-side="buy">매수 <kbd>B</kbd></button>
+          <button class="bigbtn sell" data-side="sell">매도 <kbd>S</kbd></button>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div id="mtPop" hidden>
+  <div class="mtpHead"><b id="mtPopName">—</b><span class="num" id="mtYears"></span></div>
+  <div class="mtwho" id="mtWho"></div>
+  <div class="mtline" id="mtLine"></div>
+  <div id="mtMissions"></div>
+  <div class="mtpNote">하나도 안 지키고 마음대로 사고팔아도 게임은 정상적으로 끝납니다.</div>
+</div>
+
+<div class="scrim" id="ordScrim" hidden>
+  <div class="omodal">
+    <div class="ohead">
+      <h2 id="oTitle">—</h2>
+      <button class="oclose" id="oClose">✕</button>
+    </div>
+    <div class="obody">
+      <div class="oline"><span>현재가</span><b class="num" id="oPx">—</b></div>
+      <div id="oHold"></div>
+
+      <div class="olabel" id="oQLabel">얼마나 살까요?</div>
+      <div class="opct" id="oPct"></div>
+      <div class="oqtyrow">
+        <input class="oqty num" id="oQty" type="number" min="0" step="1" value="0">
+        <span class="ounit">주</span>
+      </div>
+
+      <div id="oCalc"></div>
+      <div id="oStopBox"></div>
+      <div class="owarn" id="oWarn" hidden></div>
+    </div>
+    <div class="ofoot">
+      <button class="oghost" id="oCancel">취소</button>
+      <button class="ogo" id="oGo">매수하기</button>
     </div>
   </div>
 </div>
@@ -492,7 +603,7 @@ let pauseCd = 20;                // 같은 종목·같은 사유의 재알림 �
 
 let cash = START_CASH;
 let pos = {}, stops = {}, pending = null, trades = [];
-let riskPct = 1, side = 'buy';
+let riskPct = 1;
 let everUsedStop = false;      // 손절선을 한 번이라도 써본 사람에게만 관련 경고를 띄운다
 let peakEquity = START_CASH, mdd = 0;
 let pauseMsg = '';
@@ -825,7 +936,7 @@ function resetAccount() {
   assignNames();
   day = WARMUP; viewDay = WARMUP;      // 워밍업 1년치는 이미 지나간 과거로 깔아둔다
   cash = START_CASH; pos = {}; stops = {}; pending = null; trades = [];
-  peakEquity = START_CASH; mdd = 0; pauseMsg = ''; pauseCool = {}; sel = 0; side = 'buy';
+  peakEquity = START_CASH; mdd = 0; pauseMsg = ''; pauseCool = {}; sel = 0; ordSide = 'buy';
   finished = false; submitted = false; lastResult = null;
   $('btnResult').hidden = true;
   buildEWR();
@@ -1069,9 +1180,11 @@ function buildWatchlist() {
 function buildPosList() {
   const pl = $('poslist');
   pl.innerHTML = '<div class="empty" id="posEmpty">보유 중인 종목이 없어요</div>';
-  posRefs = D.stocks.map((s) => {
+  posRefs = D.stocks.map((s, i) => {
     const root = document.createElement('div');
     root.className = 'pos';
+    root.dataset.i = i;
+    root.title = '누르면 바로 매도창이 열려요';
     root.innerHTML =
       `<div class="dot" style="background:${colors[s.id]}"></div>` +
       `<div class="nm"><b></b><small></small></div>` +
@@ -1124,6 +1237,7 @@ function renderUI() {
   const st = D.stocks[sel], s = series(st), dv = DV();
   const { vb } = viewBar();
   const era = eraAt(vb);
+  const eqNow = equityDisp();      // 관심종목 비중 표시에도 쓰이므로 먼저 구한다
 
   setTxt($('gdate'), gameDate(vb));
   setTxt($('era'), era.name, 'era ' + era.tone);
@@ -1144,8 +1258,10 @@ function renderUI() {
   D.stocks.forEach((x, i) => {
     const r = wlRefs[i], p = dispPriceOf(x), pv = dispPrevOf(x);
     const c = pv ? p / pv - 1 : 0;
-    const held = pos[x.id]?.qty > 0;
-    setHTML(r.name, nameOf(x) + (held ? '<span class="badge">보유</span>' : ''));
+    const hp = pos[x.id];
+    // "보유" 배지 대신 비중을 숫자로. 얼마나 들고 있는지가 배지 유무보다 훨씬 중요한 정보다
+    const wgt = hp?.qty ? (hp.qty * p) / eqNow : 0;
+    setHTML(r.name, nameOf(x) + (wgt > 0 ? `<span class="badge">${(wgt * 100).toFixed(0)}%</span>` : ''));
     setTxt(r.sub, showReal ? x.archetype : '정체 미공개');
     setTxt(r.price, won(p / dvOf(x)));
     setTxt(r.chg, pct(c), 'num ' + cls(c));
@@ -1154,7 +1270,7 @@ function renderUI() {
   });
 
   // 계좌
-  const eq = equityDisp(), bi = benchIdx(), be = benchEW(), br = benchEWR();
+  const eq = eqNow, bi = benchIdx(), be = benchEW(), br = benchEWR();
   const r0 = eq / START_CASH - 1;
   setTxt($('equity'), won(eq) + '원');
   setTxt($('ret'), `${pct(r0)} · 원금 ${won(START_CASH)}원`, 'alpha ' + cls(r0));
@@ -1197,8 +1313,8 @@ function renderUI() {
     setHTML($('pendingBox'), `<div class="pending">⏳ ${nameOf(pst)} ${pending.side === 'buy' ? '매수' : '매도'} ` +
       `${won(pending.qty * dvOf(pst))}주 — 다음 날 시가에 체결돼요</div>`);
   } else setHTML($('pendingBox'), '');
-  renderOrderHint();
-  renderStopPanel();
+  renderStopChip();
+  renderOrder();
   renderMentor();
   // 정지 사유와 뉴스는 다른 정보다. 정지 중에도 그날 시황이 계속 보여야 한다
   $('pauseLine').hidden = !pauseMsg;
@@ -1210,7 +1326,16 @@ function renderMentor() {
   if (!mtRefs.length) return;
   const m = mentorAt(Math.min(Math.floor(viewDay), day));
   const res = evalMissions(m, mentorStats(m));
+  const ok = res.filter((r) => r.done).length;
+
+  // 상단바 배지는 항상, 상세는 눌렀을 때만.
+  // 중요도상 오른쪽 패널 한 칸을 통째로 차지할 정보가 아니다
   setTxt($('mtName'), m.name);
+  setTxt($('mtCount'), `${ok}/3`);
+  $('mtBadge').classList.toggle('on', ok >= 2);
+  if ($('mtPop').hidden) return;
+
+  setTxt($('mtPopName'), m.name);
   setTxt($('mtYears'), `${m.a + 1}~${m.b}년차`);
   setTxt($('mtWho'), m.who);
   setTxt($('mtLine'), `"${m.line}"`);
@@ -1352,59 +1477,170 @@ function currentNews(now) {
   return newsHold.html;
 }
 
-/** 매수 탭이면 현금 기준, 매도 탭이면 보유 수량 기준 (둘을 절대 섞지 않는다) */
-function maxQtyDisp() {
+/* ══════════════════════════════ 주문 팝업
+ * 손절선·수량 계산·주문을 한 화면에 모은다.
+ * 이 세 개는 원래 하나의 판단이라 화면에서 쪼개면 초보는 연결을 못 하고 고수는 왔다갔다 한다.
+ */
+let ordSide = 'buy', ordQty = 0, ordPct = null, ordPrevSpeed = 0, ordStopOpen = false;
+const ordOpen = () => !$('ordScrim').hidden;
+
+/** 표시 단위(분할 반영) 기준 최대 주문 수량. 매수는 현금, 매도는 보유 수량이 한도다 */
+function maxQtyFor(side_) {
   const st = D.stocks[sel], dv = DV();
-  if (side === 'buy') {
-    const unit = (dispPriceOf(st) / dv) * (1 + SLIP) * (1 + FEE);
-    return Math.floor(cash / unit);
-  }
+  if (side_ === 'buy') return Math.floor(cash / ((dispPriceOf(st) / dv) * (1 + SLIP) * (1 + FEE)));
   return Math.floor((pos[st.id]?.qty || 0) * dv);
 }
 
-function renderOrderHint() {
-  const st = D.stocks[sel], dv = DV();
-  const q = +$('qty').value || 0;
-  const pxDisp = dispPriceOf(st) / dv;
-  const amt = pxDisp * q * (side === 'buy' ? (1 + SLIP) * (1 + FEE) : (1 - SLIP) * (1 - FEE));
-  const maxQ = maxQtyDisp();
-
-  setHTML($('orderHint'), q > 0
-    ? `예상 체결가 <b>${won(pxDisp * (side === 'buy' ? 1 + SLIP : 1 - SLIP))}원</b> · ` +
-      `${side === 'buy' ? '총 매수금액' : '예상 수령액'} ${won(amt)}원<br>다음 날 시가 기준이라 실제 체결가는 달라질 수 있어요.`
-    : (side === 'buy'
-        ? `현금 ${won(cash)}원으로 최대 ${won(maxQ)}주까지 살 수 있어요.`
-        : (maxQ > 0 ? `${nameOf(st)} ${won(maxQ)}주를 보유 중이에요.` : `${nameOf(st)}는 보유하고 있지 않아요.`)));
-
-  const btn = $('btnOrder');
-  btn.disabled = q <= 0 || q > maxQ;
-  btn.className = 'bigbtn ' + side;
-  btn.textContent = side === 'buy' ? '매수' : '매도';
+function openOrder(side_) {
+  if (!D || ordOpen()) return;
+  if (side_ === 'sell' && maxQtyFor('sell') <= 0) return;
+  ordSide = side_; ordQty = 0; ordPct = null; ordStopOpen = false;
+  ordPrevSpeed = speed;
+  setSpeed(0);
+  viewDay = day;                 // 팝업 안 숫자가 흔들리지 않게 표시 시간을 논리 시간에 딱 맞춘다
+  $('ordScrim').hidden = false;
+  renderOrder();
+  setTimeout(() => $('oQty').select(), 30);
 }
 
-function renderStopPanel() {
-  const st = D.stocks[sel], dv = DV();
-  const stop = stops[st.id], px = dispPriceOf(st);
-  if (stop == null) {
-    setTxt($('stopP'), '미설정'); setTxt($('stopPct'), '—', 'num flat'); setTxt($('riskQty'), '—');
-    $('stopVsCostRow').hidden = true;
-    return;
-  }
-  const d = stop / px - 1;
-  setTxt($('stopP'), won(stop / dv) + '원');
-  setTxt($('stopPct'), pct(d), 'num ' + cls(d));
+function closeOrder() {
+  $('ordScrim').hidden = true;
+  if (ordPrevSpeed > 0) setSpeed(ordPrevSpeed);
+  ordPrevSpeed = 0;
+}
 
-  // 보유 중이라면 실제로 잃는 폭은 "평단 대비"다. 체결가가 갭으로 밀리면 둘이 크게 벌어진다
-  const p = pos[st.id];
-  $('stopVsCostRow').hidden = !(p?.qty);
-  if (p?.qty) {
-    const dc = stop / p.cost - 1;
-    setTxt($('stopVsCost'), pct(dc), 'num ' + cls(dc));
+function confirmOrder() {
+  if (!ordOpen()) return;                 // 팝업이 닫힌 상태에서 확정이 불리면 무시
+  const st = D.stocks[sel], dv = DV();
+  const q = clamp(Math.floor(ordQty) || 0, 0, maxQtyFor(ordSide));
+  if (q <= 0) return;
+  pending = { id: st.id, side: ordSide, qty: q / dv };
+  closeOrder();
+  renderUI();
+}
+
+function setOrdQty(v, fromPct = null) {
+  ordQty = clamp(Math.floor(v) || 0, 0, maxQtyFor(ordSide));
+  ordPct = fromPct;
+  renderOrder();
+}
+
+function renderOrder() {
+  if (!ordOpen()) return;
+  const st = D.stocks[sel], dv = DV(), buy = ordSide === 'buy';
+  const px = dispPriceOf(st) / dv, prev = dispPrevOf(st) / dv;
+  const ch = prev ? px / prev - 1 : 0;
+  const maxQ = maxQtyFor(ordSide);
+  const q = clamp(Math.floor(ordQty) || 0, 0, maxQ);
+  const eq = equityDisp(), p = pos[st.id];
+  const fill = px * (buy ? 1 + SLIP : 1 - SLIP);
+  const gross = fill * q, fee = gross * FEE;
+
+  $('oTitle').textContent = `${nameOf(st)} ${buy ? '매수' : '매도'}`;
+  setHTML($('oPx'), `${won(px)}원 <span class="${cls(ch)}" style="font-size:13px">` +
+    `${ch >= 0 ? '▲' : '▼'} ${pct(ch)}</span>`);
+
+  // 매도는 "내가 뭘 갖고 있는지"부터 보여줘야 판단이 된다
+  if (buy) setHTML($('oHold'), '');
+  else {
+    const held = Math.floor((p?.qty || 0) * dv), avg = p?.qty ? p.cost / dv : 0;
+    const plv = avg ? px / avg - 1 : 0, plAmt = (px - avg) * held;
+    setHTML($('oHold'),
+      `<div class="obox" style="margin-top:10px">
+         <div class="oline"><span>보유 수량</span><b class="num">${won(held)}주</b></div>
+         <div class="oline"><span>평균 단가</span><b class="num">${won(avg)}원</b></div>
+         <div class="oline"><span>평가 손익</span><b class="num ${cls(plv)}">
+           ${plAmt >= 0 ? '+' : ''}${won(plAmt)}원 (${pct(plv)})</b></div>
+       </div>`);
   }
-  const per = px - stop;
-  setTxt($('riskQty'), per > 0
-    ? won(Math.floor((equityDisp() * (riskPct / 100) / per) * dv)) + '주'
-    : '손절선이 현재가 위예요');
+
+  setTxt($('oQLabel'), buy ? '얼마나 살까요?' : '얼마나 팔까요?');
+  const opts = buy ? [[10, '10%'], [25, '25%'], [50, '50%'], [100, '최대']]
+                   : [[25, '25%'], [50, '50%'], [100, '전량']];
+  setHTML($('oPct'), opts.map(([v, l]) =>
+    `<button data-pct="${v}" class="${ordPct === v ? 'on' : ''}">${l}</button>`).join(''));
+  if ($('oQty').value !== String(q)) $('oQty').value = q;
+
+  if (q <= 0) {
+    setHTML($('oCalc'), `<div class="odiv"></div><div class="oline"><span>${
+      buy ? `현금 ${won(cash)}원으로 최대 ${won(maxQ)}주` : `보유 ${won(maxQ)}주`}</span><b></b></div>`);
+  } else if (buy) {
+    const curVal = (p?.qty || 0) * dispPriceOf(st);
+    const wNow = eq > 0 ? curVal / eq : 0, wAfter = eq > 0 ? (curVal + gross) / eq : 0;
+    setHTML($('oCalc'),
+      `<div class="odiv"></div>
+       <div class="oline"><span>예상 체결가</span><b class="num">${won(fill)}원</b></div>
+       <div class="oline"><span>주문 금액</span><b class="num">${won(gross)}원</b></div>
+       <div class="oline"><span>수수료</span><b class="num">${won(fee)}원</b></div>
+       <div class="odiv"></div>
+       <div class="oline hi"><span>내 현금</span><b class="num">${won(cash)}<span class="oarrow">→</span>${won(cash - gross - fee)}원</b></div>
+       <div class="oline hi"><span>이 종목 비중</span><b class="num">${(wNow * 100).toFixed(0)}%<span class="oarrow">→</span><span class="${wAfter >= 0.5 ? 'up' : ''}">${(wAfter * 100).toFixed(0)}%</span></b></div>`);
+    // 몰빵을 막지는 않는다. 다만 무슨 짓을 하는 중인지는 숫자로 보여준다
+    const warn = $('oWarn');
+    warn.hidden = wAfter < 0.35;
+    warn.className = 'owarn' + (wAfter >= 0.5 ? ' hot' : '');
+    if (!warn.hidden) warn.textContent =
+      `한 종목에 자산의 ${(wAfter * 100).toFixed(0)}%가 들어갑니다. ` +
+      `이 종목이 반토막 나면 전체 자산이 ${(wAfter * 50).toFixed(0)}% 줄어요.`;
+  } else {
+    const avg = p?.qty ? p.cost / dv : 0;
+    const net = gross - fee, realized = net - avg * q;
+    setHTML($('oCalc'),
+      `<div class="odiv"></div>
+       <div class="oline"><span>예상 체결가</span><b class="num">${won(fill)}원</b></div>
+       <div class="oline"><span>예상 수령액</span><b class="num">${won(net)}원</b></div>
+       <div class="oline hi"><span>실현 손익</span><b class="num ${cls(realized)}">${realized >= 0 ? '+' : ''}${won(realized)}원</b></div>
+       <div class="odiv"></div>
+       <div class="oline hi"><span>내 현금</span><b class="num">${won(cash)}<span class="oarrow">→</span>${won(cash + net)}원</b></div>
+       <div class="oline"><span>남는 수량</span><b class="num">${won(maxQ)}<span class="oarrow">→</span>${won(maxQ - q)}주</b></div>`);
+    $('oWarn').hidden = true;
+  }
+
+  setHTML($('oStopBox'), buy ? stopDrawerHtml(st, dv, px, eq) : '');
+
+  const go = $('oGo');
+  go.className = 'ogo ' + ordSide;
+  go.textContent = buy ? '매수하기' : '매도하기';
+  go.disabled = q <= 0;
+}
+
+/** 손절선 + 포지션 사이징. 기본 접힘 — 초보는 안 펼치면 그만이다 */
+function stopDrawerHtml(st, dv, px, eq) {
+  const stop = stops[st.id];
+  const head = `<button class="odtoggle ${ordStopOpen ? 'open' : ''}" id="odT"><i>▶</i> 손절선 정하기 ` +
+    `<span style="font-weight:600;color:var(--sub2)">(선택)</span></button>`;
+  if (!ordStopOpen) return `<div class="odrawer">${head}</div>`;
+
+  const sd = stop != null ? stop / dv : null;
+  const gap = sd != null ? sd / px - 1 : null;
+  const per = sd != null ? px - sd : 0;
+  const qty = per > 0 ? Math.floor(eq * (riskPct / 100) / per) : 0;
+  return `<div class="odrawer">${head}
+    <div class="odbody">
+      <div class="odhint">여기까지 떨어지면 자동으로 팔립니다. 최대 손실을 먼저 정하면 살 수량이 자동으로 계산돼요.</div>
+      <div class="oqtyrow" style="margin-bottom:9px">
+        <input class="oqty num" id="oStopIn" type="number" min="0" step="1"
+               placeholder="손절가" value="${sd != null ? Math.round(sd) : ''}">
+        <span class="ounit">원</span>
+      </div>
+      ${gap != null ? `<div class="oline"><span>현재가 대비</span><b class="num ${cls(gap)}">${pct(gap)}</b></div>` : ''}
+      <div class="olabel" style="margin:12px 0 8px">최대 얼마까지 잃어도 될까요?</div>
+      <div class="opct" id="oRisk">${[0.5, 1, 2, 3].map((v) =>
+        `<button data-r="${v}" class="${riskPct === v ? 'on' : ''}">${v}%</button>`).join('')}</div>
+      <div class="oline hi"><span>이만큼 사면 됩니다</span><b class="num">${
+        per > 0 ? `${won(qty)}주` : '손절가를 현재가보다 낮게'}</b></div>
+      ${per > 0 ? `<div class="opct" style="margin-top:4px"><button id="oApplyRisk">이 수량으로 채우기</button></div>` : ''}
+    </div></div>`;
+}
+
+/** 차트 우상단 손절선 칩 */
+function renderStopChip() {
+  const st = D.stocks[sel], stop = stops[st.id], chip = $('stopChip');
+  if (stop == null) { chip.hidden = true; return; }
+  chip.hidden = false;
+  const d = stop / dispPriceOf(st) - 1;
+  setTxt($('stopChipP'), won(stop / DV()) + '원');
+  setTxt($('stopChipPct'), pct(d));
 }
 
 /* ══════════════════════════════ 차트 */
@@ -1587,7 +1823,8 @@ function setStopFromMouse(e) {
   if (y < plot.PADT || y > plot.PADT + plot.priceH) return;
   stops[D.stocks[sel].id] = plot.invY(y);
   everUsedStop = true;
-  renderStopPanel();
+  renderStopChip();
+  renderOrder();
 }
 
 /* ══════════════════════════════ UI */
@@ -1613,13 +1850,6 @@ function syncPauseUI() {
   [...$('pCd').children].forEach((b) => b.classList.toggle('on', +b.dataset.cd === pauseCd));
 }
 
-function setSide(v) {
-  side = v;
-  [...$('ordtabs').children].forEach((b) => b.classList.toggle('on', b.dataset.side === v));
-  setTxt($('pctLabel'), v === 'buy' ? '현금의' : '보유 수량의');
-  $('qty').value = 0;
-  renderOrderHint();
-}
 
 /** [data-tip] 위에 마우스를 올리면 설명을 띄운다. 스크롤 컨테이너에 잘리지 않게 body에 고정 배치한다 */
 function bindTooltips() {
@@ -1651,9 +1881,19 @@ function bindUI() {
     const it = e.target.closest('.witem');
     if (!it) return;
     sel = +it.dataset.i;
-    $('qty').value = 0;
     snapScale = true;
     renderUI();
+  });
+
+  // 보유 목록에서 종목을 누르면 그 종목으로 이동 + 바로 매도 팝업
+  $('poslist').addEventListener('pointerdown', (e) => {
+    const row = e.target.closest('.pos');
+    if (!row || row.hidden) return;
+    const i = +row.dataset.i;
+    if (!(i >= 0)) return;
+    sel = i; snapScale = true;
+    renderUI();
+    openOrder('sell');
   });
 
   $('ctabs').onclick = (e) => {
@@ -1663,37 +1903,55 @@ function bindUI() {
     [...$('ctabs').children].forEach((x) => x.classList.toggle('on', x === b));
   };
 
-  $('ordtabs').onclick = (e) => { const b = e.target.closest('button'); if (b) setSide(b.dataset.side); };
-
-  $('pctRow').onclick = (e) => {
+  // ── 주문 팝업 ──
+  for (const el of document.querySelectorAll('[data-side]')) {
+    el.onclick = () => openOrder(el.dataset.side);
+  }
+  $('oClose').onclick = closeOrder;
+  $('oCancel').onclick = closeOrder;
+  $('oGo').onclick = () => { confirmOrder(); saveGame(); };
+  $('ordScrim').onclick = (e) => { if (e.target === $('ordScrim')) closeOrder(); };
+  $('oQty').oninput = () => setOrdQty(+$('oQty').value, null);
+  $('oPct').onclick = (e) => {
     const b = e.target.closest('button'); if (!b) return;
-    $('qty').value = Math.floor(maxQtyDisp() * (+b.dataset.pct / 100));
-    renderOrderHint();
+    const p = +b.dataset.pct;
+    setOrdQty(maxQtyFor(ordSide) * (p / 100), p);
   };
-  $('qty').oninput = renderOrderHint;
+  // 팝업 안 손절선 서랍 (동적 생성이라 위임으로 받는다)
+  $('oStopBox').onclick = (e) => {
+    const t = e.target.closest('#odT');
+    if (t) { ordStopOpen = !ordStopOpen; renderOrder(); return; }
+    const r = e.target.closest('#oRisk button');
+    if (r) { riskPct = +r.dataset.r; renderOrder(); return; }
+    if (e.target.closest('#oApplyRisk')) {
+      const st = D.stocks[sel], stop = stops[st.id], px = dispPriceOf(st);
+      if (stop != null && px - stop > 0) setOrdQty(Math.floor(equityDisp() * (riskPct / 100) / (px - stop) * DV()), null);
+    }
+  };
+  $('oStopBox').oninput = (e) => {
+    if (e.target.id !== 'oStopIn') return;
+    const v = +e.target.value;
+    const st = D.stocks[sel];
+    if (v > 0) { stops[st.id] = v * DV(); everUsedStop = true; } else delete stops[st.id];
+    renderOrder();
+  };
 
-  $('btnOrder').onclick = () => {
-    const q = +$('qty').value;
-    if (q > 0) pending = { id: D.stocks[sel].id, side, qty: q / DV() };
-    $('qty').value = 0;
-    saveGame();
-    renderUI();
-  };
+  $('stopChipX').onclick = () => { delete stops[D.stocks[sel].id]; renderUI(); };
 
-  $('riskrow').onclick = (e) => {
-    const b = e.target.closest('button'); if (!b) return;
-    riskPct = +b.dataset.r;
-    [...$('riskrow').children].forEach((x) => x.classList.toggle('on', x === b));
-    renderStopPanel();
+  // ── 멘토 팝오버 ──
+  $('mtBadge').onclick = (e) => {
+    e.stopPropagation();
+    const pop = $('mtPop');
+    pop.hidden = !pop.hidden;
+    if (!pop.hidden) {
+      const r = $('mtBadge').getBoundingClientRect();
+      pop.style.left = `${clamp(r.left, 8, innerWidth - 306)}px`;
+      pop.style.top = `${r.bottom + 8}px`;
+      renderUI();
+    }
   };
-  $('applyRisk').onclick = () => {
-    const st = D.stocks[sel], stop = stops[st.id], px = dispPriceOf(st);
-    if (stop == null || px - stop <= 0) return;
-    setSide('buy');
-    $('qty').value = Math.floor((equityDisp() * (riskPct / 100) / (px - stop)) * DV());
-    renderOrderHint();
-  };
-  $('clearStop').onclick = () => { delete stops[D.stocks[sel].id]; renderStopPanel(); };
+  $('mtPop').onclick = (e) => e.stopPropagation();
+  document.addEventListener('click', () => { $('mtPop').hidden = true; });
 
   const tog = (id, get, set) => { $(id).onclick = () => { set(!get()); $(id).classList.toggle('on', get()); }; };
   tog('tSmooth', () => smooth, (v) => { smooth = v; if (!v) { viewDay = day; snapScale = true; } });
@@ -1737,7 +1995,15 @@ function bindUI() {
   window.addEventListener('beforeunload', saveGame);
 
   window.addEventListener('keydown', (e) => {
+    // 주문 팝업이 떠 있으면 Enter로 확정, Esc로 취소 (팝업 때문에 클릭이 하나 느는 것을 상쇄)
+    if (ordOpen()) {
+      if (e.code === 'Escape') { e.preventDefault(); closeOrder(); }
+      if (e.code === 'Enter') { e.preventDefault(); if (!$('oGo').disabled) { confirmOrder(); saveGame(); } }
+      return;
+    }
     if (e.target.tagName === 'INPUT') return;
+    if (e.code === 'KeyB') { e.preventDefault(); openOrder('buy'); return; }
+    if (e.code === 'KeyS') { e.preventDefault(); openOrder('sell'); return; }
     if (e.code === 'Space') { e.preventDefault(); setSpeed(speed > 0 ? 0 : 1); }
     if (e.code === 'ArrowRight' && speed === 0) { advanceDay(); viewDay = day; }
     if (e.code >= 'Digit1' && e.code <= 'Digit9') {
@@ -1914,9 +2180,9 @@ function showIntro() {
        <div class="introrow"><span>🎯</span><div>
          <b>그냥 사서 묻어둔 것보다 잘하면 이깁니다.</b><br>가만히 둬도 오르니까, 그걸 넘어야 실력입니다.</div></div>
        <div class="introrow"><span>🖱️</span><div>
-         <b>싸다 싶으면 사고, 아니다 싶으면 팔면 됩니다.</b><br>오른쪽 화면은 몰라도 됩니다. 필요해지면 그때 보세요.</div></div>
+         <b>오를 것 같으면 매수, 아니다 싶으면 매도.</b><br>주문창을 열면 시간이 멈추니 천천히 보고 정하세요.</div></div>
        <div class="keys">
-         <span><b>스페이스</b> 재생·정지</span><span><b>1~9</b> 종목 전환</span><span><b>차트 드래그</b> 손절선</span>
+         <span><b>스페이스</b> 재생·정지</span><span><b>B</b> 매수</span><span><b>S</b> 매도</span><span><b>1~9</b> 종목 전환</span>
        </div>`,
     foot: [{ label: '시작하기', cls: 'prim', on: () => closeModal() }],
   });
@@ -2348,7 +2614,7 @@ async function newRun() {
   runSeed = (Date.now() ^ (Math.random() * 1e9)) >>> 0;
   clearSave();
   try { await startRun({}); } finally { busy = false; }
-  setSide('buy'); $('qty').value = 0; renderUI();
+  renderUI();
 }
 
 /* 개발용 디버그 핸들 */
@@ -2356,7 +2622,7 @@ window.__dbg = {
   get D() { return D; },
   get state() {
     return { day, viewDay, cash, pos: JSON.parse(JSON.stringify(pos)), stops: { ...stops },
-             equity: equityAt(day), mdd, risk: accountRisk(), trades: trades.length, side };
+             equity: equityAt(day), mdd, risk: accountRisk(), trades: trades.length, ordSide };
   },
   adv(n = 1) { let p = 0; for (let i = 0; i < n && day < D.meta.gameDays; i++) if (advanceDay()) p++; viewDay = day; renderUI(); return { day, paused: p }; },
   finish() { const ap = autoPause; autoPause = false; ffwd = true; while (day < D.meta.gameDays) advanceDay(); ffwd = false; autoPause = ap; viewDay = day; renderUI(); return lastResult; },
@@ -2383,7 +2649,12 @@ window.__dbg = {
   curve() { drawEquityCurve(); const c = $('eqCurve'); return c ? `${c.width}x${c.height}` : 'none'; },
   board() { return localBoard(); },
   select(i) { sel = i; snapScale = true; renderUI(); },
-  setSide(v) { setSide(v); },
+  openOrder(v) { openOrder(v); return { qty: ordQty, max: maxQtyFor(v) }; },
+  closeOrder() { closeOrder(); },
+  setOrdQty(v) { setOrdQty(v); return ordQty; },
+  confirm() { confirmOrder(); },
+  ordOpen() { return ordOpen(); },
+  toggleStopDrawer() { ordStopOpen = !ordStopOpen; renderOrder(); return ordStopOpen; },
   order(s_, q) { pending = { id: D.stocks[sel].id, side: s_, qty: q / DV() }; renderUI(); },
   setStop(pDisp) { stops[D.stocks[sel].id] = pDisp * DV(); everUsedStop = true; renderUI(); },
   setAutoPause(v) { autoPause = v; syncPauseUI(); },
@@ -2395,7 +2666,7 @@ window.__dbg = {
   setViewDay(v) { viewDay = v; },
   px() { return dispPriceOf(D.stocks[sel]) / DV(); },
   dv() { return DV(); },
-  maxQty() { return maxQtyDisp(); },
+  maxQty(v = ordSide) { return maxQtyFor(v); },
   draw() { drawChart(0.016); },
   render() { renderUI(); },
 };
