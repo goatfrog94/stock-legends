@@ -84,6 +84,7 @@
   .wprice b{display:block; font-size:13px; font-weight:800}
   .wprice small{font-size:11px; font-weight:700}
   .badge{font-size:9.5px; font-weight:800; padding:2px 5px; border-radius:4px; background:var(--accent); color:#fff; margin-left:4px}
+  .credit{padding:9px 16px 12px; font-size:10.5px; font-weight:700; color:var(--sub2); letter-spacing:.2px}
   .refbox{padding:12px 16px; border-top:1px solid var(--line)}
   .refbox h4{font-size:11px; font-weight:800; color:var(--sub2); margin-bottom:6px}
 
@@ -443,6 +444,7 @@
         <div class="kv"><span data-tip="이번 판에 나온 종목 전부를 똑같은 금액으로 나눠 사고, 매일 비중이 틀어진 만큼 다시 맞춰줬을 때의 수익률입니다.">전 종목 고르게</span><b class="num" id="bmEwr">—</b></div>
         <div class="kv"><span data-tip="이번 판에 나온 종목 전부를 똑같은 금액으로 나눠 사서 30년간 그냥 둔 수익률입니다.">전 종목 묻어두기</span><b class="num" id="bmEw">—</b></div>
       </div>
+      <div class="credit">by kwonyoungtae</div>
     </div>
 
     <div class="pane">
@@ -596,8 +598,10 @@ let viewDay = 0;                 // 표시 시간 (차트·숫자는 이걸 쓴�
 let speed = 0, sel = 0, visN = 250;
 let useOverlay = true, showGhost = false, showReal = false, smooth = true;
 
-/* 자동 정지 — 사유별로 끄고 켠다. 껐는데도 멈추면 기능이 없는 것과 같다 */
-let autoPause = true;
+/* 자동 정지 — 사유별로 끄고 켠다. 껐는데도 멈추면 기능이 없는 것과 같다.
+ * 기본값은 꺼짐. 처음 하는 사람은 왜 멈추는지 모른 채 흐름만 끊긴다.
+ * 사유별 항목은 켜둔 채로 두어서, 마스터 스위치만 켜면 바로 쓸 수 있게 한다. */
+let autoPause = false;
 let pauseOpt = { stop: true, high: true, ma200: true, gap: true, era: true, split: true };
 let pauseCd = 20;                // 같은 종목·같은 사유의 재알림 간격(거래일)
 
@@ -756,7 +760,7 @@ function restoreAccount(s) {
   peakEquity = s.peakEquity ?? START_CASH; mdd = s.mdd ?? 0;
   sel = Math.min(s.sel ?? 0, D.stocks.length - 1);
   riskPct = s.riskPct ?? 1; visN = s.visN ?? 250; smooth = s.smooth ?? true;
-  autoPause = s.autoPause ?? true; pauseCd = s.pauseCd ?? 60;
+  autoPause = s.autoPause ?? false; pauseCd = s.pauseCd ?? 60;
   if (s.pauseOpt) Object.assign(pauseOpt, s.pauseOpt);
   pending = null; pauseMsg = ''; pauseCool = {};
   if (Array.isArray(s.eqPath)) for (let t = 0; t < s.eqPath.length && t < eqPath.length; t++) eqPath[t] = s.eqPath[t];
@@ -2183,7 +2187,8 @@ function showIntro() {
          <b>오를 것 같으면 매수, 아니다 싶으면 매도.</b><br>주문창을 열면 시간이 멈추니 천천히 보고 정하세요.</div></div>
        <div class="keys">
          <span><b>스페이스</b> 재생·정지</span><span><b>B</b> 매수</span><span><b>S</b> 매도</span><span><b>1~9</b> 종목 전환</span>
-       </div>`,
+       </div>
+       <div class="credit" style="text-align:center; padding:14px 0 0">by kwonyoungtae</div>`,
     foot: [{ label: '시작하기', cls: 'prim', on: () => closeModal() }],
   });
 }
